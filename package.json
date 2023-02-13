@@ -1,8 +1,8 @@
 {
-  "name": "sitecore-cdp-tenant-javascript-sdk",
+  "name": "sitecore-personalize-tenant-sdk",
   "version": "0.1.0",
-  "description": "The Sitecore CDP/Personalize API SDK",
-  "main": "index.js",
+  "description": "The Sitecore Personalize Tenant/Admin API SDK",
+  "main": "lib/client.js",
   "type": "module",
   "scripts": {
     "build": "tsc -p .",
