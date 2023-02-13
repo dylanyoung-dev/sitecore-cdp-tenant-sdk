@@ -79,7 +79,7 @@ jobs:
 
       # Publish version to public repository
       - name: Publish to NPM
-        run: npm publish --verbose --access public --tag ${{ env.RELEASE_TAG }} .\dist
+        run: npm publish --verbose --access public --tag ${{ env.RELEASE_TAG }} dist
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
