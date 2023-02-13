@@ -4,7 +4,7 @@ import { AuthService, ConnectionService, TemplateService } from './services/inde
 /**
  * This is the Sitecore CDP/Personalize SDK Client
  */
-class Client {
+export class Client {
   #options: IClientInitOptions;
 
   #authService;
@@ -15,21 +15,19 @@ class Client {
     this.#authService = AuthService(options);
   }
 
-  public async authenticate() {
+  public async Authenticate() {
     this.#options = await this.#authService.Authenticate();
   }
 
-  public templates() {
+  public Templates() {
     const templateService = TemplateService(this.#options);
 
     return templateService;
   }
 
-  public connections() {
+  public Connections() {
     const connectionService = ConnectionService(this.#options);
 
     return connectionService;
   }
 }
-
-export default Client;
