@@ -2,12 +2,18 @@
   "name": "sitecore-personalize-tenant-sdk",
   "version": "0.1.1-beta.0",
   "description": "The Sitecore Personalize Tenant/Admin API SDK",
-  "main": "dist/client.js",
+  "main": "client.js",
   "type": "module",
+  "files": [
+    "dist",
+    "package.json"
+  ],
   "scripts": {
     "build": "tsc -p .",
+    "clean": "npx rimraf ./dist",
     "build:local": "npm run build && npm link --force",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prebuild": "npm run clean"
   },
   "engines": {
     "node": ">=16.17.0"
