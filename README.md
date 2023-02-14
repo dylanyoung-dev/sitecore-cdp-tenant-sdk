@@ -4,4 +4,23 @@ Welcome to the Javascript based SDK for using the Sitecore Personalize Tenant/Ad
 
 ## Getting Started
 
+To get started using this SDK, you should first install the package as a dependency in your Node project:
+
+```bash
+> npm install sitecore-personalize-tenant-sdk
+```
+
+Once it's installed you'll need to initialize the client:
+
+```javascript
+import { Client } from 'sitecore-personalize-tenant-sdk';
+
+let client: Client;
+client = new Client({
+  clientId: '<ClientId>',
+  clientSecret: '<ClientSecret>',
+  region: RegionOptions.EU,
+});
+```
+
 ## Development / Contributions
