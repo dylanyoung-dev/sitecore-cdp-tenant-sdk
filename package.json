@@ -8,6 +8,7 @@
     "dist",
     "package.json"
   ],
+  "types": "dist/client.d.ts",
   "scripts": {
     "build": "tsc -p .",
     "clean": "npx rimraf ./dist",
@@ -22,9 +23,14 @@
     "type": "git",
     "url": "git+https://github.com/dylanyoung-dev/sitecore-cdp-tenant-sdk.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "Sitecore",
+    "Personalize",
+    "Typescript",
+    "SDK"
+  ],
+  "author": "Dylan Young",
+  "license": "GPL-3.0-only",
   "bugs": {
     "url": "https://github.com/dylanyoung-dev/sitecore-cdp-tenant-sdk/issues"
   },
