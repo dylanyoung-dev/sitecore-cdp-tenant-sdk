@@ -5,8 +5,10 @@ import { BaseService } from './base.js';
  * This is the Template Service
  * @param clientOptions Client initialization options
  */
-export const TemplateService = (clientOptions: IClientInitOptions) => {
-  const service = BaseService(clientOptions);
+export class TemplateService extends BaseService {
+  constructor(options: IClientInitOptions) {
+    super(options);
+  }
 
   /**
    * Get all common templates filtered by type
@@ -14,9 +16,9 @@ export const TemplateService = (clientOptions: IClientInitOptions) => {
    *        Pass in a template type to filter by (ex. 'Decision, Web, Audience')
    * @returns Promise<Template[]> Returns a list of templates
    */
-  const GetAllTemplates = async (templateType: TemplateType): Promise<Template[] | null> => {
+  public GetAllTemplates = async (templateType: TemplateType): Promise<Template[] | null> => {
     try {
-      const response = await service.Get(`v3/templates`);
+      const response = await this.Get(`v3/templates`);
 
       if (response.ok) {
         let templates: Template[] = (await response.json()) as Template[];
@@ -30,9 +32,9 @@ export const TemplateService = (clientOptions: IClientInitOptions) => {
     return null;
   };
 
-  const GetByFriendlyId = async (friendlyId: string): Promise<Template | null> => {
+  public GetByFriendlyId = async (friendlyId: string): Promise<Template | null> => {
     try {
-      const response = await service.Get(`v3/templates/${friendlyId}`);
+      const response = await this.Get(`v3/templates/${friendlyId}`);
 
       if (response.ok) {
         let template: Template = (await response.json()) as Template;
@@ -46,9 +48,9 @@ export const TemplateService = (clientOptions: IClientInitOptions) => {
     return null;
   };
 
-  const UpdateTemplate = async (template: Template): Promise<Template | null> => {
+  public UpdateTemplate = async (template: Template): Promise<Template | null> => {
     try {
-      const response = await service.Put(`v3/templates/${template.ref}`, template);
+      const response = await this.Put(`v3/templates/${template.ref}`, template);
 
       if (response.ok) {
         const result: Template = (await response.json()) as Template;
@@ -62,9 +64,9 @@ export const TemplateService = (clientOptions: IClientInitOptions) => {
     return null;
   };
 
-  const CreateTemplate = async (template: Template): Promise<Template | null> => {
+  public CreateTemplate = async (template: Template): Promise<Template | null> => {
     try {
-      const response = await service.Post(`v3/templates`, template);
+      const response = await this.Post(`v3/templates`, template);
 
       if (response.ok) {
         const result: Template = (await response.json()) as Template;
@@ -77,6 +79,4 @@ export const TemplateService = (clientOptions: IClientInitOptions) => {
 
     return null;
   };
-
-  return { GetAllTemplates, GetByFriendlyId, UpdateTemplate, CreateTemplate };
-};
+}

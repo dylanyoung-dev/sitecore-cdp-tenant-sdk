@@ -13,7 +13,7 @@ To get started using this SDK, you should first install the package as a depende
 Once it's installed you'll need to initialize the client:
 
 ```javascript
-import { Client } from 'sitecore-personalize-tenant-sdk';
+import { Client, RegionOptions } from 'sitecore-personalize-tenant-sdk';
 
 let client: Client;
 client = new Client({

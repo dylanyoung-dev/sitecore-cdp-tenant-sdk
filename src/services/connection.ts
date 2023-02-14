@@ -5,12 +5,14 @@ import { BaseService } from './base.js';
  * This is the Connection Service
  * @param clientOptions Client initialization options
  */
-export const ConnectionService = (clientOptions: IClientInitOptions) => {
-  const service = BaseService(clientOptions);
+export class ConnectionService extends BaseService {
+  constructor(options: IClientInitOptions) {
+    super(options);
+  }
 
-  const GetAllConnections = async (): Promise<Connection[] | null> => {
+  public GetAllConnections = async (): Promise<Connection[] | null> => {
     try {
-      const response = await service.Get(`v2/connections`);
+      const response = await this.Get(`v2/connections`);
 
       if (response.ok) {
         let connections: Connection[] = (await response.json()) as Connection[];
@@ -23,6 +25,4 @@ export const ConnectionService = (clientOptions: IClientInitOptions) => {
 
     return null;
   };
-
-  return { GetAllConnections };
-};
+}

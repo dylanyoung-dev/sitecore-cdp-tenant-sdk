@@ -7,28 +7,20 @@ import { AuthService, ConnectionService, TemplateService } from './services/inde
 export class Client {
   #options: IClientInitOptions;
 
+  public Templates: TemplateService;
+
   #authService;
 
   constructor(options: IClientInitOptions) {
     this.#options = options;
 
     this.#authService = AuthService(options);
+
+    this.Templates = new TemplateService(options);
   }
 
   public async Authenticate() {
     this.#options = await this.#authService.Authenticate();
-  }
-
-  public Templates() {
-    const templateService = TemplateService(this.#options);
-
-    return templateService;
-  }
-
-  public Connections() {
-    const connectionService = ConnectionService(this.#options);
-
-    return connectionService;
   }
 }
 
