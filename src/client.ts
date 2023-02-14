@@ -31,3 +31,7 @@ export class Client {
     return connectionService;
   }
 }
+
+// Export Services and Models to assist with referencing
+export * from './models/index.js';
+export * from './services/index.js';
