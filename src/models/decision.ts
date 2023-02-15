@@ -1,11 +1,11 @@
-export interface DecisionModelDefinition {
+export interface IDecisionModelDefinition {
   clientKey?: string;
   href?: string;
   ref?: string;
   name: string;
   revision: number;
   archived: boolean;
-  deploymentConfiguration: DeploymentConfiguration;
+  deploymentConfiguration: IDeploymentConfiguration;
   tags: string[];
   variants: {
     href: string;
@@ -20,11 +20,11 @@ export interface DecisionModelDefinition {
   };
 }
 
-export interface DeploymentConfiguration {
-  variants: DeployVariant[];
+export interface IDeploymentConfiguration {
+  variants: IDeployVariant[];
 }
 
-export interface DeployVariant {
+export interface IDeployVariant {
   variantRef: string;
   split: number;
   status: string;
@@ -32,7 +32,7 @@ export interface DeployVariant {
   variantRevision: number;
 }
 
-export interface DecisionModelVariant {
+export interface IDecisionModelVariant {
   clientKey?: string;
   href?: string;
   ref?: string;
@@ -51,6 +51,6 @@ export interface DecisionModelVariant {
   inProduction?: boolean;
 }
 
-export interface DecisionModelRevision {
+export interface IDecisionModelRevision {
   name: string;
 }

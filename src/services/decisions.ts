@@ -1,3 +1,10 @@
-const decisionModelService = () => {};
+import { IClientInitOptions } from '../models/index.js';
+import { BaseService } from './index.js';
 
-export default decisionModelService;
+export class DecisionModelService extends BaseService {
+  constructor(options: IClientInitOptions) {
+    super(options);
+  }
+
+  public Test = async () => {};
+}

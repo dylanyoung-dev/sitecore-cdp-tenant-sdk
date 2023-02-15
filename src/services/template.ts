@@ -16,7 +16,7 @@ export class TemplateService extends BaseService {
    *        Pass in a template type to filter by (ex. 'Decision, Web, Audience')
    * @returns Promise<Template[]> Returns a list of templates
    */
-  public GetAllTemplates = async (templateType: TemplateType): Promise<Template[] | null> => {
+  public GetAll = async (templateType: TemplateType): Promise<Template[] | null> => {
     try {
       const response = await this.Get(`v3/templates`);
 
@@ -32,7 +32,7 @@ export class TemplateService extends BaseService {
     return null;
   };
 
-  public GetByFriendlyId = async (friendlyId: string): Promise<Template | null> => {
+  public GetById = async (friendlyId: string): Promise<Template | null> => {
     try {
       const response = await this.Get(`v3/templates/${friendlyId}`);
 
@@ -48,7 +48,7 @@ export class TemplateService extends BaseService {
     return null;
   };
 
-  public UpdateTemplate = async (template: Template): Promise<Template | null> => {
+  public Update = async (template: Template): Promise<Template | null> => {
     try {
       const response = await this.Put(`v3/templates/${template.ref}`, template);
 
@@ -64,7 +64,7 @@ export class TemplateService extends BaseService {
     return null;
   };
 
-  public CreateTemplate = async (template: Template): Promise<Template | null> => {
+  public Create = async (template: Template): Promise<Template | null> => {
     try {
       const response = await this.Post(`v3/templates`, template);
 
