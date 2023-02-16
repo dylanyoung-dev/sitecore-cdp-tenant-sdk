@@ -1,4 +1,4 @@
-import { Connection, IClientInitOptions } from '../models/index.js';
+import { IClientInitOptions, IConnection } from '../models/index.js';
 import { BaseService } from './base.js';
 
 /**
@@ -10,12 +10,12 @@ export class ConnectionService extends BaseService {
     super(options);
   }
 
-  public GetAll = async (): Promise<Connection[] | null> => {
+  public GetAll = async (): Promise<IConnection[] | null> => {
     try {
       const response = await this.Get(`v2/connections`);
 
       if (response.ok) {
-        let connections: Connection[] = (await response.json()) as Connection[];
+        let connections: IConnection[] = (await response.json()) as IConnection[];
 
         return connections;
       }
@@ -26,12 +26,12 @@ export class ConnectionService extends BaseService {
     return null;
   };
 
-  public GetByRef = async (ref: string): Promise<Connection | null> => {
+  public GetByRef = async (ref: string): Promise<IConnection | null> => {
     try {
       const response = await this.Get(`v2/connections/${ref}`);
 
       if (response.ok) {
-        let connection: Connection = (await response.json()) as Connection;
+        let connection: IConnection = (await response.json()) as IConnection;
 
         return connection;
       }
@@ -42,5 +42,5 @@ export class ConnectionService extends BaseService {
     return null;
   };
 
-  public Test = async (connection: Connection): Promise<void> => {};
+  public Test = async (connection: IConnection): Promise<void> => {};
 }
