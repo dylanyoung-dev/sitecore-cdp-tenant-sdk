@@ -9,4 +9,7 @@ describe('Decision Models Service', () => {
   // it('should be created', () => {
   //     expect(service).toBeTruthy();
   // });
+  it('should be true', () => {
+    expect(true).to.be.true;
+  });
 });
