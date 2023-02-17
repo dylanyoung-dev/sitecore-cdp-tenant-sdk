@@ -1,4 +1,9 @@
-import { IClientInitOptions, IDecisionModelDefinition, IResponse } from '../models/index.js';
+import {
+  IClientInitOptions,
+  IDecisionModelDefinition,
+  IGuestContext,
+  IResponse,
+} from '../models/index.js';
 import { BaseService } from './index.js';
 
 export class DecisionModelDefinitionService extends BaseService {
@@ -40,5 +45,5 @@ export class DecisionModelDefinitionService extends BaseService {
     return null;
   };
 
-  public Test = async () => {};
+  public Test = async (guestContext: IGuestContext) => {};
 }
