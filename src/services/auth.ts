@@ -1,5 +1,5 @@
-import { AuthToken } from '../models/auth.js';
 import fetch, { Response } from 'node-fetch';
+import { AuthToken } from '../models/auth.js';
 import { IClientInitOptions } from '../models/index.js';
 
 /**
@@ -9,24 +9,23 @@ import { IClientInitOptions } from '../models/index.js';
  */
 export const AuthService = (clientOptions: IClientInitOptions) => {
   /**
-   * Authenticate using oAuth Client Credentials Flow
+   * Authenticate using oAuth Client Credentials Flow (Cloud Portal Only)
    * @returns Promise<IClientInitOptions>
    */
   const Authenticate = async (): Promise<AuthToken | null> => {
-    const servicePath = `https://${clientOptions.region}/v2/oauth/token`;
-
+    const servicePath = `https://auth.sitecorecloud.io/oauth/token`;
     const params = new URLSearchParams();
 
     params.append('grant_type', 'client_credentials');
-    params.append('clientKey', clientOptions.clientId);
+    params.append('client_id', clientOptions.clientId);
+    params.append('client_secret', clientOptions.clientSecret);
+    params.append('audience', 'https://api.sitecorecloud.io');
 
     const response: Response = await fetch(servicePath, {
       method: 'post',
       body: params,
       headers: {
-        Authorization: `Basic ${Buffer.from(
-          `${clientOptions.clientId}:${clientOptions.clientSecret}`
-        ).toString('base64')}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
       },
     });
 

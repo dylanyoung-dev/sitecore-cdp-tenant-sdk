@@ -6,7 +6,7 @@ export interface IClientInitOptions {
 }
 
 export enum RegionOptions {
-  EU = 'api.boxever.com',
-  US = 'api-us.boxever.com',
-  APJ = 'api-ap-southeast-2-production.boxever.com',
+  EU = 'api-engage-eu.sitecorecloud.io',
+  US = 'api-engage-us.sitecorecloud.io',
+  APJ = 'api-engage-ap.sitecorecloud.io',
 }

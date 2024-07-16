@@ -1,6 +1,6 @@
 {
   "name": "sitecore-personalize-tenant-sdk",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "The Sitecore Personalize Tenant/Admin API SDK",
   "main": "dist/client.js",
   "type": "module",
@@ -15,7 +15,7 @@
     "test": "mocha ./mocha.opts"
   },
   "engines": {
-    "node": ">=16.17.0"
+    "node": ">=18.18.1"
   },
   "repository": {
     "type": "git",
