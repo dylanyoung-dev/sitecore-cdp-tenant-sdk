@@ -1,4 +1,5 @@
-import { Connection, IClientInitOptions } from '../models/index.js';
+import { Client } from '../client.js';
+import { Connection } from '../models/index.js';
 import { BaseService } from './base.js';
 
 /**
@@ -6,8 +7,8 @@ import { BaseService } from './base.js';
  * @param clientOptions Client initialization options
  */
 export class ConnectionService extends BaseService {
-  constructor(options: IClientInitOptions) {
-    super(options);
+  constructor(client: Client) {
+    super(client);
   }
 
   public GetAllConnections = async (): Promise<Connection[] | null> => {

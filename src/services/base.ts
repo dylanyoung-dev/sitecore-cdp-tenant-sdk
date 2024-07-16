@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 import { IClientInitOptions } from '../models/index.js';
+import { Client } from '../client.js';
 
 /**
  * This is the Base Service used by all other services (except Auth)
@@ -7,31 +8,33 @@ import { IClientInitOptions } from '../models/index.js';
  * @returns BaseService
  */
 export class BaseService {
-  private clientOptions: IClientInitOptions;
+  private client: Client;
 
-  constructor(options: IClientInitOptions) {
-    this.clientOptions = options;
+  constructor(client: Client) {
+    this.client = client;
   }
 
   private Fetch = async (method: string, path: string, body: object | null | undefined) => {
-    if (!this.clientOptions.region) {
+    if (!this.client.options.region) {
       throw 'You did not provide a valid region when you initialized the client';
     }
 
-    if (!this.clientOptions.accessToken) {
+    if (!this.client.options.accessToken) {
       throw 'You must run the auth command first to initialize the CLI';
     }
 
     let data = body !== null && body !== undefined ? JSON.stringify(body) : null;
 
-    return await fetch(`https://${this.clientOptions.region}/${path}`, {
-      method,
-      body: data,
-      headers: {
-        Authorization: `Bearer ${this.clientOptions.accessToken}`,
-        'Content-Type': 'application/json',
-      },
-    });
+    return await this.client.requestWithAuthCheck(() =>
+      fetch(`https://${this.client.options.region}/${path}`, {
+        method,
+        body: data,
+        headers: {
+          Authorization: `Bearer ${this.client.options.accessToken}`,
+          'Content-Type': 'application/json',
+        },
+      })
+    );
   };
 
   public Get = async (path: string) => {

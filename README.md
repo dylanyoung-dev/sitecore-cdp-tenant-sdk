@@ -31,4 +31,14 @@ This module is built with ESM in mind and doesn't currently support CJS.
 
 ## Development / Contributions
 
+You can get setup for local development by cloning the repository and running the following commands:
+
+```
+$ npm install
+
+$ npm run dev
+```
+
+This will start the app in the current terminal window, where changes to the current files, will be reflected immediately (via a watch command with tsup).
+
 ## Release

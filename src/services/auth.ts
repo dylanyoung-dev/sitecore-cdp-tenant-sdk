@@ -12,7 +12,7 @@ export const AuthService = (clientOptions: IClientInitOptions) => {
    * Authenticate using oAuth Client Credentials Flow
    * @returns Promise<IClientInitOptions>
    */
-  const Authenticate = async (): Promise<IClientInitOptions> => {
+  const Authenticate = async (): Promise<AuthToken | null> => {
     const servicePath = `https://${clientOptions.region}/v2/oauth/token`;
 
     const params = new URLSearchParams();
@@ -33,14 +33,12 @@ export const AuthService = (clientOptions: IClientInitOptions) => {
     if (response.ok) {
       let authToken: AuthToken | null = await (response.json() as Promise<AuthToken>);
 
-      if (authToken) {
-        clientOptions.accessToken = authToken.access_token;
-      }
+      return authToken;
     } else {
       throw new Error("Couldn't authenticate");
     }
 
-    return clientOptions;
+    return null;
   };
 
   return { Authenticate };
