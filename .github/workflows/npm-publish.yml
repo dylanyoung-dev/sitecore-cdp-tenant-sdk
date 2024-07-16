@@ -28,7 +28,7 @@ jobs:
         uses: actions/setup-node@v3.4.1
         with:
           registry-url: 'https://registry.npmjs.org'
-          node-version: '16.17.0'
+          node-version: '18.18.1'
       
       - name: Install and Build
         run: npm i && npm run build
