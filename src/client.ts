@@ -1,5 +1,11 @@
 import { AuthToken, IClientInitOptions } from './models/index.js';
-import { AuthService, ConnectionService, TemplateService } from './services/index.js';
+import {
+  AuthService,
+  ConnectionService,
+  DecisionService,
+  FlowService,
+  TemplateService,
+} from './services/index.js';
 
 /**
  * This is the Sitecore CDP/Personalize SDK Client
@@ -11,6 +17,8 @@ export class Client {
 
   public Templates: TemplateService;
   public Connections: ConnectionService;
+  public Flows: FlowService;
+  public Decisions: DecisionService;
 
   constructor(options: IClientInitOptions) {
     this.options = options;
@@ -19,6 +27,8 @@ export class Client {
 
     this.Templates = new TemplateService(this);
     this.Connections = new ConnectionService(this);
+    this.Flows = new FlowService(this);
+    this.Decisions = new DecisionService(this);
   }
 
   private async ensureAuthenticated() {

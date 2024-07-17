@@ -11,7 +11,7 @@ export class ConnectionService extends BaseService {
     super(client);
   }
 
-  public GetAllConnections = async (): Promise<Connection[] | null> => {
+  public GetAllConnections = async (): Promise<Connection[] | undefined> => {
     try {
       const response = await this.Get(`v2/connections`);
 
@@ -23,7 +23,19 @@ export class ConnectionService extends BaseService {
     } catch (ex) {
       throw new Error(ex as string);
     }
+  };
 
-    return null;
+  public GetConnectionByRef = async (connectionRef: string): Promise<Connection | undefined> => {
+    try {
+      const response = await this.Get(`v2/connections/${connectionRef}`);
+
+      if (response.ok) {
+        let connection: Connection = (await response.json()) as Connection;
+
+        return connection;
+      }
+    } catch (ex) {
+      throw new Error(ex as string);
+    }
   };
 }
