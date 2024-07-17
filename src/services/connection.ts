@@ -4,14 +4,18 @@ import { BaseService } from './base.js';
 
 /**
  * This is the Connection Service
- * @param clientOptions Client initialization options
+ * @param {Client} client Sitecore Personalize Client
  */
 export class ConnectionService extends BaseService {
   constructor(client: Client) {
     super(client);
   }
 
-  public GetAllConnections = async (): Promise<Connection[] | undefined> => {
+  /**
+   * Get all connections
+   * @returns Promise<Connection[]> Returns an array of connections
+   */
+  public GetAll = async (): Promise<Connection[] | undefined> => {
     try {
       const response = await this.Get(`v2/connections`);
 
@@ -25,7 +29,13 @@ export class ConnectionService extends BaseService {
     }
   };
 
-  public GetConnectionByRef = async (connectionRef: string): Promise<Connection | undefined> => {
+  /**
+   * Get a connection by reference
+   * @param {string} connectionRef
+   *        Pass in a connection reference (Id or FriendlyId) to get a specific connection
+   * @returns Promise<Connection> Returns a connection object
+   */
+  public GetByRef = async (connectionRef: string): Promise<Connection | undefined> => {
     try {
       const response = await this.Get(`v2/connections/${connectionRef}`);
 

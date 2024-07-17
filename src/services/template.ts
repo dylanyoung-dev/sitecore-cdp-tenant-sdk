@@ -1,10 +1,10 @@
 import { Client } from '../client.js';
-import { IClientInitOptions, Template, TemplateType } from '../models/index.js';
+import { Template, TemplateType } from '../models/index.js';
 import { BaseService } from './base.js';
 
 /**
  * This is the Template Service
- * @param clientOptions Client initialization options
+ * @param client client
  */
 export class TemplateService extends BaseService {
   constructor(client: Client) {
@@ -12,14 +12,20 @@ export class TemplateService extends BaseService {
   }
 
   /**
-   * Get all common templates filtered by type
-   * @param templateType
-   *        Pass in a template type to filter by (ex. 'Decision, Web, Audience')
-   * @returns Promise<Template[]> Returns a list of templates
+   * Get all templates
+   * @param {TemplateType} [templateType]
+   *        Pass in a template type to filter by type
+   * @returns Promise<Template[]> Returns an array of templates
    */
-  public GetAllTemplates = async (templateType: TemplateType): Promise<Template[] | null> => {
+  public GetAll = async (templateType?: TemplateType): Promise<Template[] | undefined> => {
     try {
-      const response = await this.Get(`v3/templates`);
+      let requestUrl = `v3/templates`;
+
+      if (templateType) {
+        requestUrl = `v3/templates?type=${templateType.toUpperCase()}`;
+      }
+
+      const response = await this.Get(requestUrl);
 
       if (response.ok) {
         let templates: Template[] = (await response.json()) as Template[];
@@ -29,13 +35,17 @@ export class TemplateService extends BaseService {
     } catch (ex) {
       throw new Error(ex as string);
     }
-
-    return null;
   };
 
-  public GetByFriendlyId = async (friendlyId: string): Promise<Template | null> => {
+  /**
+   * Get a template by reference
+   * @param {string} templateRef
+   *        Pass in a template reference (Id or FriendlyId) to get a specific template
+   * @returns Promise<Template> Returns a template object
+   */
+  public GetByRef = async (templateRef: string): Promise<Template | undefined> => {
     try {
-      const response = await this.Get(`v3/templates/${friendlyId}`);
+      const response = await this.Get(`v3/templates/${templateRef}`);
 
       if (response.ok) {
         let template: Template = (await response.json()) as Template;
@@ -45,11 +55,15 @@ export class TemplateService extends BaseService {
     } catch (ex) {
       throw new Error(ex as string);
     }
-
-    return null;
   };
 
-  public UpdateTemplate = async (template: Template): Promise<Template | null> => {
+  /**
+   * Update a template
+   * @param {Template} template
+   *        Pass in a template object to update
+   * @returns Promise<Template> Returns an updated template object
+   */
+  public Update = async (template: Template): Promise<Template | undefined> => {
     try {
       const response = await this.Put(`v3/templates/${template.ref}`, template);
 
@@ -61,11 +75,15 @@ export class TemplateService extends BaseService {
     } catch (ex) {
       throw new Error(ex as string);
     }
-
-    return null;
   };
 
-  public CreateTemplate = async (template: Template): Promise<Template | null> => {
+  /**
+   * Create a template
+   * @param {Template} template
+   *        Pass in a template object to create
+   * @returns Promise<Template> Returns a new template object
+   */
+  public Create = async (template: Template): Promise<Template | undefined> => {
     try {
       const response = await this.Post(`v3/templates`, template);
 
@@ -77,7 +95,5 @@ export class TemplateService extends BaseService {
     } catch (ex) {
       throw new Error(ex as string);
     }
-
-    return null;
   };
 }

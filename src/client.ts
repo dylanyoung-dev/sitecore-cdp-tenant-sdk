@@ -8,7 +8,8 @@ import {
 } from './services/index.js';
 
 /**
- * This is the Sitecore CDP/Personalize SDK Client
+ * This is the Sitecore Personalize Client
+ * @param {IClientInitOptions} options Client initialization options
  */
 export class Client {
   options: IClientInitOptions;
@@ -39,7 +40,7 @@ export class Client {
   }
 
   private async authenticate() {
-    const authResponse: AuthToken | null = await this.#authService.Authenticate(); // Assuming this returns an object with token details
+    const authResponse: AuthToken | undefined = await this.#authService.Authenticate(); // Assuming this returns an object with token details
 
     if (!authResponse) {
       throw new Error('Authentication failed');

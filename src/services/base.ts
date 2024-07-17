@@ -1,10 +1,9 @@
 import fetch from 'node-fetch';
-import { IClientInitOptions } from '../models/index.js';
 import { Client } from '../client.js';
 
 /**
  * This is the Base Service used by all other services (except Auth)
- * @param clientOptions Client initialization options
+ * @param {Client} Client Sitecore Personalize Client
  * @returns BaseService
  */
 export class BaseService {

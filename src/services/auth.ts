@@ -12,7 +12,7 @@ export const AuthService = (clientOptions: IClientInitOptions) => {
    * Authenticate using oAuth Client Credentials Flow (Cloud Portal Only)
    * @returns Promise<IClientInitOptions>
    */
-  const Authenticate = async (): Promise<AuthToken | null> => {
+  const Authenticate = async (): Promise<AuthToken | undefined> => {
     const servicePath = `https://auth.sitecorecloud.io/oauth/token`;
     const params = new URLSearchParams();
 
@@ -36,8 +36,6 @@ export const AuthService = (clientOptions: IClientInitOptions) => {
     } else {
       throw new Error("Couldn't authenticate");
     }
-
-    return null;
   };
 
   return { Authenticate };
