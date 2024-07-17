@@ -12,7 +12,8 @@
   "scripts": {
     "dev": "tsup --watch",
     "build": "tsup",
-    "test": "mocha ./mocha.opts"
+    "build:test": "tsup src/**/*.spec.ts --outDir dist/tests",
+    "test": "npm run build:test && mocha --config ./.mocharc.json"
   },
   "engines": {
     "node": ">=18.18.1"
