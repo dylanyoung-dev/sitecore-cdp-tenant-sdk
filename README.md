@@ -1,6 +1,6 @@
 # Sitecore Personalize Tenant SDK
 
-Welcome to the Javascript based SDK for using the Sitecore Personalize Tenant/Admin APIs. This repository is useful if you want to create integrations with these APIs. This repository is used by many other repositories such as the Serializer for CDP/Personalize, and many Automation Testing scripts.
+Welcome to the Javascript based SDK for using the Sitecore Personalize Tenant/Admin APIs. This repository is useful if you want to create integrations with these APIs. This repository is used by many other repositories such as the Serializer for CDP/Personalize, Automation Testing Scripts and some AI powered integrations I'm working on. Currently this only supports the Cloud Portal for Sitecore CDP/P.
 
 ## Getting Started
 
@@ -22,12 +22,10 @@ client = new Client({
   region: RegionOptions.EU,
 });
 
-await client.Authenticate();
-
-let response = await client.Templates.GetAllTemplates(TemplateType.Web);
+let response = await client.Templates.GetAll(TemplateType.Web);
 ```
 
-This module is built with ESM in mind and doesn't currently support CJS.
+This module is built to support ESM and CommonJS.
 
 ## Development / Contributions
 
