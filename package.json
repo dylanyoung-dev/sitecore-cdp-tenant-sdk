@@ -35,7 +35,9 @@
   },
   "homepage": "https://github.com/dylanyoung-dev/sitecore-cdp-tenant-sdk#readme",
   "dependencies": {
-    "node-fetch": "3.2.10"
+    "nock": "^13.5.4",
+    "node-fetch": "3.2.10",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/chai": "^4.3.16",

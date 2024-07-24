@@ -1,4 +1,4 @@
-export interface Template {
+export interface ITemplate {
   clientKey?: string;
   href?: string;
   ref?: string;
@@ -17,16 +17,24 @@ export interface Template {
     decisionOutputReference: string;
     decisionReturnType: string;
   };
-  templateElements: TemplateElement[];
+  templateElements: ITemplateElement[];
   render?: boolean;
   defaultTemplate: boolean;
   tags?: string[];
   customTemplate?: boolean;
 }
 
-export interface TemplateElement {
+export interface ITemplateElement {
   id: string;
   template: string;
+}
+
+export interface ITestTemplateOutput {
+  templates: ITemplateElement[];
+}
+
+export interface ITestTemplateRenderOutput {
+  [key: string]: ITemplateElement[];
 }
 
 export enum TemplateType {

@@ -1,4 +1,4 @@
-export interface HrefProp {
+export interface IHrefProp {
   href: string;
   archived: boolean;
 }

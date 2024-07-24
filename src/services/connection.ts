@@ -1,5 +1,5 @@
 import { Client } from '../client.js';
-import { Connection } from '../models/index.js';
+import { IConnection } from '../models/index.js';
 import { BaseService } from './base.js';
 
 /**
@@ -15,12 +15,12 @@ export class ConnectionService extends BaseService {
    * Get all connections
    * @returns Promise<Connection[]> Returns an array of connections
    */
-  public GetAll = async (): Promise<Connection[] | undefined> => {
+  public GetAll = async (): Promise<IConnection[] | undefined> => {
     try {
       const response = await this.Get(`v2/connections`);
 
       if (response.ok) {
-        let connections: Connection[] = (await response.json()) as Connection[];
+        let connections: IConnection[] = (await response.json()) as IConnection[];
 
         return connections;
       }
@@ -33,14 +33,14 @@ export class ConnectionService extends BaseService {
    * Get a connection by reference
    * @param {string} connectionRef
    *        Pass in a connection reference (Id or FriendlyId) to get a specific connection
-   * @returns Promise<Connection> Returns a connection object
+   * @returns Promise<IConnection | undefined> Returns a connection object
    */
-  public GetByRef = async (connectionRef: string): Promise<Connection | undefined> => {
+  public GetByRef = async (connectionRef: string): Promise<IConnection | undefined> => {
     try {
       const response = await this.Get(`v2/connections/${connectionRef}`);
 
       if (response.ok) {
-        let connection: Connection = (await response.json()) as Connection;
+        let connection: IConnection = (await response.json()) as IConnection;
 
         return connection;
       }

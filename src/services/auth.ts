@@ -1,5 +1,5 @@
 import fetch, { Response } from 'node-fetch';
-import { AuthToken } from '../models/auth.js';
+import { IAuthToken } from '../models/auth.js';
 import { IClientInitOptions } from '../models/index.js';
 
 /**
@@ -10,9 +10,9 @@ import { IClientInitOptions } from '../models/index.js';
 export const AuthService = (clientOptions: IClientInitOptions) => {
   /**
    * Authenticate using oAuth Client Credentials Flow (Cloud Portal Only)
-   * @returns Promise<IClientInitOptions>
+   * @returns Promise<IAuthToken | undefined>
    */
-  const Authenticate = async (): Promise<AuthToken | undefined> => {
+  const Authenticate = async (): Promise<IAuthToken | undefined> => {
     const servicePath = `https://auth.sitecorecloud.io/oauth/token`;
     const params = new URLSearchParams();
 
@@ -30,7 +30,7 @@ export const AuthService = (clientOptions: IClientInitOptions) => {
     });
 
     if (response.ok) {
-      let authToken: AuthToken | null = await (response.json() as Promise<AuthToken>);
+      let authToken: IAuthToken | null = await (response.json() as Promise<IAuthToken>);
 
       return authToken;
     } else {

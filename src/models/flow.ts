@@ -1,6 +1,6 @@
-import { HrefProp } from './common';
+import { IHrefProp } from '.';
 
-export interface FlowDefinition {
+export interface IFlowDefinition {
   name: string;
   clientKey: string;
   href: string;
@@ -16,28 +16,28 @@ export interface FlowDefinition {
   triggers: string; // TODO: Come back to this
   tags: string[];
   businessProcess: string; // possibly an enum
-  traffic: TrafficDefinition;
+  traffic: ITrafficDefinition;
   variants: any; // TODO: Come back to this
   transpiledVariants: string;
   status: FlowStatus;
-  schedule: ScheduleDefinition;
-  revisions: HrefProp;
-  sampleSizeConfig: SampleSizeDefinition;
+  schedule: IScheduleDefinition;
+  revisions: IHrefProp;
+  sampleSizeConfig: ISampleSizeDefinition;
 }
 
-export interface ScheduleDefinition {
+export interface IScheduleDefinition {
   type: string;
   startDate: string;
   endDate: string;
 }
 
-export interface TrafficDefinition {
+export interface ITrafficDefinition {
   type: TrafficDefinitionType;
   weightingAlgorithm: WeightingAlgorithm;
   allocation: number;
   allocationHigh: number;
   allocationLow: number;
-  splits: SplitDefinition[];
+  splits: ISplitDefinition[];
   coupled: boolean;
   modifiedAt: string;
 }
@@ -47,7 +47,7 @@ export enum TrafficDefinitionType {
   Advanced = 'advancedTraffic',
 }
 
-export interface SplitDefinition {
+export interface ISplitDefinition {
   ref: string;
   split?: number;
   lowSplit?: number;
@@ -90,7 +90,7 @@ export enum FlowChannel {
   Web = 'WEB',
 }
 
-export interface SampleSizeDefinition {
+export interface ISampleSizeDefinition {
   baseValue: number;
   minimumDetectableDifference: number;
   confidenceLevel: number;

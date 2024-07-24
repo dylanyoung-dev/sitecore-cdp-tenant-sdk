@@ -1,4 +1,4 @@
-export interface Connection {
+export interface IConnection {
   clientKey?: string;
   href?: string;
   ref?: string;
@@ -8,23 +8,23 @@ export interface Connection {
   modifiedAt: string;
   revision: number;
   archived: boolean;
-  auth: AuthType;
-  request: RequestType;
+  auth: IAuthType;
+  request: IRequestType;
   inputMappings?: InputMapping[];
-  outputMappings?: OutputMapping[];
-  customHeaders?: CustomHeader[];
-  urlParameters?: UrlParameter[];
+  outputMappings?: IOutputMapping[];
+  customHeaders?: ICustomHeader[];
+  urlParameters?: IUrlParameter[];
   systemType: string;
   connectionTimeout: number;
   socketTimeout: number;
   icon: string;
 }
 
-export interface AuthType {
+export interface IAuthType {
   authType: string;
 }
 
-export interface RequestType {
+export interface IRequestType {
   requestType: string;
   connectionUrl: string;
   requestBody: string;
@@ -32,15 +32,15 @@ export interface RequestType {
 
 export interface InputMapping {}
 
-export interface OutputMapping {
+export interface IOutputMapping {
   label: string;
   outputReference: string;
   type: string;
 }
 
-export interface CustomHeader {
+export interface ICustomHeader {
   name: string;
   value: string;
 }
 
-export interface UrlParameter {}
+export interface IUrlParameter {}

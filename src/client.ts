@@ -1,4 +1,4 @@
-import { AuthToken, IClientInitOptions } from './models/index.js';
+import { IAuthToken, IClientInitOptions } from './models/index.js';
 import {
   AuthService,
   ConnectionService,
@@ -40,7 +40,7 @@ export class Client {
   }
 
   private async authenticate() {
-    const authResponse: AuthToken | undefined = await this.#authService.Authenticate(); // Assuming this returns an object with token details
+    const authResponse: IAuthToken | undefined = await this.#authService.Authenticate(); // Assuming this returns an object with token details
 
     if (!authResponse) {
       throw new Error('Authentication failed');

@@ -1,4 +1,10 @@
-import { BaseService, Client, DecisionModelDefinition } from '../client';
+import { BaseService, Client } from '../client';
+import {
+  IDecisionDebugResponse,
+  IDecisionModelDefinition,
+  IDecisionModelVariant,
+  IGuestContext,
+} from '../models';
 
 /**
  * This is the Decision Service
@@ -11,15 +17,15 @@ export class DecisionService extends BaseService {
 
   /**
    * Get all decisions
-   * @returns Promise<DecisionModelDefinition[]> Returns an array of Decision Model Definitions
+   * @returns Promise<IDecisionModelDefinition[] | undefined> Returns an array of Decision Model Definitions
    */
-  public GetAll = async (): Promise<DecisionModelDefinition[] | undefined> => {
+  public GetAll = async (): Promise<IDecisionModelDefinition[] | undefined> => {
     try {
       const response = await this.Get(`v2/decisionModelDefinitions`);
 
       if (response.ok) {
-        let decisions: DecisionModelDefinition[] =
-          (await response.json()) as DecisionModelDefinition[];
+        let decisions: IDecisionModelDefinition[] =
+          (await response.json()) as IDecisionModelDefinition[];
 
         return decisions;
       }
@@ -32,18 +38,74 @@ export class DecisionService extends BaseService {
    * Get a decision by reference
    * @param {string} decisionRef
    *        Pass in a decision reference (Id or FriendlyId) to get a specific decision
-   * @returns Promise<DecisionModelDefinition> Returns a decision object
+   * @returns Promise<IDecisionModelDefinition | undefined> Returns a decision object
    */
   public GetDecisionDefinitionByRef = async (
     decisionRef: string
-  ): Promise<DecisionModelDefinition | undefined> => {
+  ): Promise<IDecisionModelDefinition | undefined> => {
     try {
       const response = await this.Get(`v2/decisionModelDefinitions/${decisionRef}`);
 
       if (response.ok) {
-        let decision: DecisionModelDefinition = (await response.json()) as DecisionModelDefinition;
+        let decision: IDecisionModelDefinition =
+          (await response.json()) as IDecisionModelDefinition;
 
         return decision;
+      }
+    } catch (ex) {
+      throw new Error(ex as string);
+    }
+  };
+
+  /**
+   * Get decision variants
+   * @param {string} decisionRef
+   *        Pass in a decision variant reference (Id or FriendlyId) to get a specific decision model variant
+   * @returns Promise<IDecisionModelVariant[] | undefined> Returns an array of Decision Model Variants
+   */
+  public GetDecisionVariants = async (
+    decisionRef: string
+  ): Promise<IDecisionModelVariant[] | undefined> => {
+    try {
+      const response = await this.Get(`v2/decisionModelDefinitions/${decisionRef}/variants`);
+
+      if (response.ok) {
+        let variants: IDecisionModelVariant[] = (await response.json()) as IDecisionModelVariant[];
+
+        return variants;
+      }
+    } catch (ex) {
+      throw new Error(ex as string);
+    }
+  };
+
+  /**
+   * Test a decision model
+   * @param {IGuestContext} guestContext
+   *        Pass in a guest context object
+   * @param {string} decisionModelRef
+   *        Pass in a decision model reference (Id or FriendlyId)
+   * @param {string} decisionModelVariantRef
+   *       Pass in a decision model variant reference (Id or FriendlyId)
+   * @returns Promise<IDecisionDebugResponse | undefined> Returns a decision debug response object
+   */
+  public TestDecisionModelVariant = async (
+    guestContext: IGuestContext,
+    decisionModelRef: string,
+    decisionModelVariantRef: string
+  ): Promise<IDecisionDebugResponse | undefined> => {
+    try {
+      const response = await this.Post(`v2/testDecisionModel`, {
+        context: guestContext,
+        decisionModelRef: decisionModelRef,
+        decisionModelVariantRef: decisionModelVariantRef,
+      });
+
+      if (response.ok) {
+        let debugResponse: IDecisionDebugResponse =
+          (await response.json()) as IDecisionDebugResponse;
+
+        return debugResponse;
       }
     } catch (ex) {
       throw new Error(ex as string);
