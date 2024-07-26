@@ -43,7 +43,9 @@ export class Client {
     const authResponse: IAuthToken | undefined = await this.#authService.Authenticate(); // Assuming this returns an object with token details
 
     if (!authResponse) {
-      throw new Error('Authentication failed');
+      throw new Error(
+        "Authentication failed - Double check that you've configured the client correctly"
+      );
     }
 
     this.options.accessToken = authResponse.access_token;
@@ -58,4 +60,5 @@ export class Client {
 
 // Export Services and Models to assist with referencing
 export * from './models/index.js';
+export * from './schema/index.js';
 export * from './services/index.js';

@@ -18,10 +18,6 @@ export class BaseService {
       throw 'You did not provide a valid region when you initialized the client';
     }
 
-    if (!this.client.options.accessToken) {
-      throw 'You must run the auth command first to initialize the CLI';
-    }
-
     let data = body !== null && body !== undefined ? JSON.stringify(body) : null;
 
     return await this.client.requestWithAuthCheck(() =>
@@ -36,19 +32,19 @@ export class BaseService {
     );
   };
 
-  public Get = async (path: string) => {
+  protected Get = async (path: string) => {
     return await this.Fetch('get', path, null);
   };
 
-  public Post = async (path: string, body: object | null | undefined) => {
+  protected Post = async (path: string, body: object | null | undefined) => {
     return await this.Fetch('post', path, body);
   };
 
-  public Put = async (path: string, body: object | null | undefined) => {
+  protected Put = async (path: string, body: object | null | undefined) => {
     return await this.Fetch('put', path, body);
   };
 
-  public Delete = async (path: string, body: object | null | undefined) => {
+  protected Delete = async (path: string, body: object | null | undefined) => {
     return await this.Fetch('delete', path, body);
   };
 }

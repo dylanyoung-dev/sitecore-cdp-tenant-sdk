@@ -1,15 +1,14 @@
 import { z } from 'zod';
+import { FlowType } from '../models';
+
+const FlowTypeValues = Object.values(FlowType) as [string, ...string[]];
 
 export const CreateExperimentSchema = z.object({
-  name: z.string(),
-  modifiedByRef: z.string(),
-  modifiedAt: z.string(),
-  revision: z.number(),
-  friendlyId: z.string(),
-  type: z.string(),
+  name: z.string().min(1, { message: 'name must be at least 1 character long' }),
+  friendlyId: z.string().min(1, { message: 'friendlyId must be at least 1 character long' }),
+  type: z.enum(FlowTypeValues),
   subtype: z.string(),
   channels: z.string(),
-  triggers: z.string(),
   tags: z.array(z.string()),
   businessProcess: z.string(),
   traffic: z.object({

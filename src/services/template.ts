@@ -1,5 +1,6 @@
 import { Client } from '../client.js';
 import {
+  IResponse,
   ITemplate,
   ITemplateElement,
   ITestTemplateOutput,
@@ -21,9 +22,11 @@ export class TemplateService extends BaseService {
    * Get all templates
    * @param {TemplateType} [templateType]
    *        Pass in a template type to filter by type
-   * @returns Promise<ITemplate[] | undefined> Returns an array of templates
+   * @returns Promise<IResponse<ITemplate[]> | undefined> Returns a response collection with an array of templates
    */
-  public GetAll = async (templateType?: TemplateType): Promise<ITemplate[] | undefined> => {
+  public GetAll = async (
+    templateType?: TemplateType
+  ): Promise<IResponse<ITemplate[]> | undefined> => {
     try {
       let requestUrl = `v3/templates`;
 
@@ -34,7 +37,9 @@ export class TemplateService extends BaseService {
       const response = await this.Get(requestUrl);
 
       if (response.ok) {
-        let templates: ITemplate[] = (await response.json()) as ITemplate[];
+        let templates: IResponse<ITemplate[]> | undefined = (await response.json()) as IResponse<
+          ITemplate[]
+        >;
 
         return templates;
       }
@@ -76,7 +81,7 @@ export class TemplateService extends BaseService {
     variables: any
   ): Promise<ITestTemplateOutput | undefined> => {
     try {
-      const response = await this.Post(`v3/templates/test`, {
+      const response = await this.Post(`v3/templates/process`, {
         templates: templateElements,
         templateVariables: variables,
       });
@@ -92,20 +97,23 @@ export class TemplateService extends BaseService {
   };
 
   /**
-   * Test existing templates
-   * @param {ITemplateElement[]} templates
-   *        Pass in an array of template elements to test
-   * @returns Promise<ITestTemplateRenderOutput | undefined> Returns a test template render
+   * Test a template by friendlyId with custom variables (great if you want to see how a custom template will render with custom variables)
+   * @param {string} friendlyId
+   *        Pass in a template friendlyId to test
+   * @param {any} templateParams
+   *        Pass in an object of variables to test ex. { "name": "John Doe" }
+   * @returns Promise<ITestTemplateRenderOutput | undefined> Returns a test template render output
    */
-  public TestTemplateRender = async (templates: {
-    [key: string]: { friendlyId: string; templateParams: any };
-  }) => {
+  public TestTemplateRender = async (friendlyId: string, templateParams: any) => {
     try {
-      const response = await this.Post(`v3/templates/render`, templates);
+      const response = await this.Post(`v3/templates/renderTemplates`, {
+        templates: { test: { friendlyId, templateParams } },
+      });
 
       if (response.ok) {
-        let result: ITestTemplateRenderOutput =
-          (await response.json()) as ITestTemplateRenderOutput;
+        let jsonResult = await response.json();
+
+        let result: ITestTemplateRenderOutput = jsonResult as ITestTemplateRenderOutput;
 
         return result;
       }

@@ -2,6 +2,8 @@
 
 Welcome to the Javascript based SDK for using the Sitecore Personalize Tenant/Admin APIs. This repository is useful if you want to create integrations with these APIs. This repository is used by many other repositories such as the Serializer for CDP/Personalize, Automation Testing Scripts and some AI powered integrations I'm working on. Currently this only supports the Cloud Portal for Sitecore CDP/P.
 
+> This **IS NOT** for ingestion of event data, you should use the Sitecore Engage SDK or Cloud SDK depending on your usage needs. (https://doc.sitecore.com/xmc/en/developers/sdk/latest/cloud-sdk/cloud-sdk-and-engage-sdk-comparison-chart.html)
+
 ## Getting Started
 
 To get started using this SDK, you should first install the package as a dependency in your Node project:

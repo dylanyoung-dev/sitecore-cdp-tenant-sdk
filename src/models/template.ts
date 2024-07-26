@@ -34,11 +34,13 @@ export interface ITestTemplateOutput {
 }
 
 export interface ITestTemplateRenderOutput {
-  [key: string]: ITemplateElement[];
+  renderedTemplates: { test: ITemplateElement[] };
 }
 
 export enum TemplateType {
   Decision = 'DECISION',
   Web = 'WEB',
   Audience = 'AUDIENCE',
+  Condition = 'CONDITION',
+  JsModule = 'JS_MODULE',
 }
