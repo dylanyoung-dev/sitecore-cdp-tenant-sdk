@@ -122,6 +122,8 @@ export class TemplateService extends BaseService {
     }
   };
 
+  public TestTemplate = async () => {};
+
   /**
    * Update a template
    * @param {ITemplate} template

@@ -54,6 +54,26 @@ export class FlowService extends BaseService {
   };
 
   /**
+   * Update a flow (Experience or Experiment)
+   * @param {IFlowDefinition} flow
+   *        Pass in a flow definition to update a flow
+   * @returns Promise<IFlowDefinition | undefined> Returns a flow object
+   */
+  public Update = async (flow: IFlowDefinition): Promise<IFlowDefinition | undefined> => {
+    try {
+      const response = await this.Put(`v3/flowDefinitions/${flow.ref}`, flow);
+
+      if (response.ok) {
+        let flow: IFlowDefinition = (await response.json()) as IFlowDefinition;
+
+        return flow;
+      }
+    } catch (ex) {
+      throw new Error(ex as string);
+    }
+  };
+
+  /**
    * Create an experience
    * @param {IFlowDefinition} flow
    *        Pass in a flow definition to create an experience
@@ -62,6 +82,8 @@ export class FlowService extends BaseService {
    */
   public CreateExperience = async (flow: IFlowDefinition): Promise<IFlowDefinition | undefined> => {
     try {
+      //const validatedData = CreateExperienceSchema.parse(flow);
+
       const response = await this.Post(`v3/flowDefinitions`, flow);
 
       if (response.ok) {
