@@ -76,7 +76,7 @@ export class TemplateService extends BaseService {
    *        Pass in an object of variables to test ex. { "name": "John Doe" }
    * @returns Promise<ITestTemplateOutput | undefined> Returns a test template output
    */
-  public TestTemplateVariables = async (
+  public TestNewTemplate = async (
     templateElements: ITemplateElement[],
     variables: any
   ): Promise<ITestTemplateOutput | undefined> => {
@@ -104,7 +104,7 @@ export class TemplateService extends BaseService {
    *        Pass in an object of variables to test ex. { "name": "John Doe" }
    * @returns Promise<ITestTemplateRenderOutput | undefined> Returns a test template render output
    */
-  public TestTemplateRender = async (friendlyId: string, templateParams: any) => {
+  public TestExistingTemplate = async (friendlyId: string, templateParams: any) => {
     try {
       const response = await this.Post(`v3/templates/renderTemplates`, {
         templates: { test: { friendlyId, templateParams } },
