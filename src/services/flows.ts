@@ -1,7 +1,14 @@
 import { z } from 'zod';
 import { Client } from '../client';
-import { IFlowDefinition } from '../models';
-import { CreateExperimentSchema } from '../schema';
+import {
+  FlowBusinessProcessType,
+  FlowSubType,
+  FlowType,
+  IFlowDefinition,
+  TrafficDefinitionType,
+  WeightingAlgorithm,
+} from '../models';
+import { CreateExperienceSchema, CreateExperimentSchema } from '../schema';
 import { BaseService } from './base';
 
 /**
@@ -82,9 +89,32 @@ export class FlowService extends BaseService {
    */
   public CreateExperience = async (flow: IFlowDefinition): Promise<IFlowDefinition | undefined> => {
     try {
-      //const validatedData = CreateExperienceSchema.parse(flow);
+      // Validate the Input Data using Zod
+      const validatedData = CreateExperienceSchema.parse(flow);
 
-      const response = await this.Post(`v3/flowDefinitions`, flow);
+      // Add default values for Experience before validation
+      const mergedData = {
+        ...validatedData,
+        subtype: FlowSubType.Experience,
+        businessProcess:
+          validatedData.type === FlowType.Triggered
+            ? FlowBusinessProcessType.Triggered
+            : FlowBusinessProcessType.Interactive,
+        traffic: {
+          type: TrafficDefinitionType.Simple,
+          allocation: 100,
+          weightingAlgorithm: WeightingAlgorithm.UserDefined,
+          splits: [],
+        },
+        variants: [],
+        sampleSizeConfig: {
+          baseValue: 0.02, // Default Value
+          minimumDetectableDifference: 0.2, // Default Value
+          confidenceLevel: 0.95, // Default Value
+        },
+      };
+
+      const response = await this.Post(`v3/flowDefinitions`, mergedData);
 
       if (response.ok) {
         let flow: IFlowDefinition = (await response.json()) as IFlowDefinition;
@@ -92,7 +122,11 @@ export class FlowService extends BaseService {
         return flow;
       }
     } catch (ex) {
-      throw new Error(ex as string);
+      if (ex instanceof z.ZodError) {
+        console.error('Flow Definition failed validation: ', ex.errors);
+      } else {
+        throw new Error(ex as string);
+      }
     }
   };
 

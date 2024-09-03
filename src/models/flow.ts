@@ -1,45 +1,54 @@
 import { IHrefProp } from '.';
 
 export interface IFlowDefinition {
-  name: string;
-  clientKey: string;
-  href: string;
-  ref: string;
-  modifiedByRef: string;
-  modifiedAt: string;
-  revision: number;
-  archived: boolean;
-  friendlyId: string;
-  type: FlowType;
-  subtype: FlowSubType;
-  channels: FlowChannel;
-  triggers: string; // TODO: Come back to this
-  tags: string[];
-  businessProcess: string; // possibly an enum
-  traffic: ITrafficDefinition;
-  variants: any; // TODO: Come back to this
-  transpiledVariants: string;
-  status: FlowStatus;
-  schedule: IScheduleDefinition;
-  revisions: IHrefProp;
-  sampleSizeConfig: ISampleSizeDefinition;
+  name?: string;
+  clientKey?: string;
+  href?: string;
+  ref?: string;
+  modifiedByRef?: string;
+  modifiedAt?: string;
+  revision?: number;
+  archived?: boolean;
+  friendlyId?: string;
+  type?: FlowType;
+  subtype?: FlowSubType;
+  channels?: FlowChannel[];
+  triggers?: string; // TODO: Come back to this
+  tags?: string[];
+  businessProcess?: string; // possibly an enum
+  traffic?: ITrafficDefinition;
+  variants?: any; // TODO: Come back to this
+  transpiledVariants?: string;
+  status?: FlowStatus;
+  schedule?: IScheduleDefinition;
+  revisions?: IHrefProp;
+  sampleSizeConfig?: ISampleSizeDefinition;
 }
 
 export interface IScheduleDefinition {
-  type: string;
-  startDate: string;
-  endDate: string;
+  type?: string;
+  startDate?: string;
+  endDate?: string;
+}
+
+export enum FlowBusinessProcessType {
+  Interactive = 'interactive_v1',
+  Triggered = 'triggered_v1',
+}
+
+export enum FlowScheduleType {
+  Simple = 'simpleSchedule',
 }
 
 export interface ITrafficDefinition {
-  type: TrafficDefinitionType;
-  weightingAlgorithm: WeightingAlgorithm;
-  allocation: number;
-  allocationHigh: number;
-  allocationLow: number;
-  splits: ISplitDefinition[];
-  coupled: boolean;
-  modifiedAt: string;
+  type?: TrafficDefinitionType;
+  weightingAlgorithm?: WeightingAlgorithm;
+  allocation?: number;
+  allocationHigh?: number;
+  allocationLow?: number;
+  splits?: ISplitDefinition[];
+  coupled?: boolean;
+  modifiedAt?: string;
 }
 
 export enum TrafficDefinitionType {
@@ -48,7 +57,7 @@ export enum TrafficDefinitionType {
 }
 
 export interface ISplitDefinition {
-  ref: string;
+  ref?: string;
   split?: number;
   lowSplit?: number;
   highSplit?: number;
@@ -91,7 +100,7 @@ export enum FlowChannel {
 }
 
 export interface ISampleSizeDefinition {
-  baseValue: number;
-  minimumDetectableDifference: number;
-  confidenceLevel: number;
+  baseValue?: number;
+  minimumDetectableDifference?: number;
+  confidenceLevel?: number;
 }
