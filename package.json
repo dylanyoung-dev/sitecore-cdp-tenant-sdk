@@ -1,6 +1,6 @@
 {
   "name": "sitecore-personalize-tenant-sdk",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "The Sitecore Personalize Tenant/Admin API SDK",
   "main": "dist/client.js",
   "type": "module",
