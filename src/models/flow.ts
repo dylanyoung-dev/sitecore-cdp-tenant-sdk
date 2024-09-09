@@ -1,4 +1,6 @@
-import { IHrefProp } from '.';
+import { IHrefProp, ITemplateElement } from '.';
+import { IGoals } from './goal';
+import { ITask } from './task';
 
 export interface IFlowDefinition {
   name?: string;
@@ -10,19 +12,62 @@ export interface IFlowDefinition {
   revision?: number;
   archived?: boolean;
   friendlyId?: string;
+  dashboardLinks?: IDashboardLink;
+  target?: IFlowTarget;
   type?: FlowType;
   subtype?: FlowSubType;
   channels?: FlowChannel[];
-  triggers?: string; // TODO: Come back to this
+  triggers?: IFlowTrigger[];
   tags?: string[];
-  businessProcess?: string; // possibly an enum
+  goal?: IGoals;
+  businessProcess?: FlowBusinessProcessType;
   traffic?: ITrafficDefinition;
-  variants?: any; // TODO: Come back to this
-  transpiledVariants?: string;
+  variants?: IFlowVariant[];
+  transpiledVariants?: IFlowVariant[];
   status?: FlowStatus;
   schedule?: IScheduleDefinition;
   revisions?: IHrefProp;
   sampleSizeConfig?: ISampleSizeDefinition;
+  notificationEnabled?: boolean;
+}
+
+export interface IFlowTarget {
+  script: string;
+  targetPages: IFlowTargetPage[];
+}
+
+export interface IFlowTrigger {
+  name: string;
+  description: string;
+  identifier: IFlowIdentifier[];
+}
+
+export interface IFlowIdentifier {
+  operator: string;
+  value: string;
+}
+
+export interface IFlowTargetPage {
+  operator: string;
+  value: string;
+}
+
+export interface IDashboardLink {
+  url: string;
+  name: string;
+}
+
+export interface IFlowVariant {
+  ref?: string;
+  name?: string;
+  isControl?: boolean;
+  assets?: ITemplateElement[];
+  templateVariables?: IFlowTemplateVariables;
+  tasks: ITask[];
+}
+
+export interface IFlowTemplateVariables {
+  [key: string]: string;
 }
 
 export interface IScheduleDefinition {
