@@ -80,6 +80,34 @@ export class DecisionService extends BaseService {
   };
 
   /**
+   * Update Decision Variant
+   * @param {string} decisionVariantRef
+   *        Pass in a decision variant reference (Id or FriendlyId)
+   * @param {IDecisionModelVariant} decisionVariant
+   *        Pass in a decision variant, with your changes to update a decision model variant
+   * @returns
+   */
+  public UpdateDecisionModelVariant = async (
+    decisionVariantRef: string,
+    decisionVariant: IDecisionModelVariant
+  ): Promise<IDecisionModelVariant | undefined> => {
+    try {
+      const response = await this.Put(
+        `v2/decisionModelVariants/${decisionVariantRef}`,
+        decisionVariant
+      );
+
+      if (response.ok) {
+        let variant: IDecisionModelVariant = (await response.json()) as IDecisionModelVariant;
+
+        return variant;
+      }
+    } catch (ex) {
+      throw new Error(ex as string);
+    }
+  };
+
+  /**
    * Test a decision model
    * @param {IGuestContext} guestContext
    *        Pass in a guest context object

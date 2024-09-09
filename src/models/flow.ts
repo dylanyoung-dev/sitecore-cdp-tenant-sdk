@@ -1,4 +1,4 @@
-import { IHrefProp, ITemplateElement } from '.';
+import { IHrefProp, ISampleSizeDefinition, ITemplateElement, ITemplateVariables } from '.';
 import { IGoals } from './goal';
 import { ITask } from './task';
 
@@ -62,12 +62,8 @@ export interface IFlowVariant {
   name?: string;
   isControl?: boolean;
   assets?: ITemplateElement[];
-  templateVariables?: IFlowTemplateVariables;
+  templateVariables?: ITemplateVariables;
   tasks: ITask[];
-}
-
-export interface IFlowTemplateVariables {
-  [key: string]: string;
 }
 
 export interface IScheduleDefinition {
@@ -142,10 +138,4 @@ export enum FlowChannel {
   PushNotification = 'PUSH_NOTIFICATION',
   SMS = 'SMS',
   Web = 'WEB',
-}
-
-export interface ISampleSizeDefinition {
-  baseValue?: number;
-  minimumDetectableDifference?: number;
-  confidenceLevel?: number;
 }

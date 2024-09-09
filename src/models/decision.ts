@@ -1,23 +1,19 @@
+import { IHrefProp, ISampleSizeDefinition, ITemplateVariables } from './common';
+
 export interface IDecisionModelDefinition {
   clientKey?: string;
   href?: string;
   ref?: string;
-  name: string;
-  revision: number;
-  archived: boolean;
-  deploymentConfiguration: IDeploymentConfiguration;
-  tags: string[];
-  variants: {
-    href: string;
-  };
-  revisions: {
-    href: string;
-  };
-  sampleSizeCConfig: {
-    baseValue: string;
-    minimumDetectableEffect: string;
-    confidenceLevel: string;
-  };
+  name?: string;
+  revision?: number;
+  archived?: boolean;
+  modifiedByRef?: string;
+  modifiedAt?: string;
+  deploymentConfiguration?: IDeploymentConfiguration;
+  tags?: string[];
+  variants?: IHrefProp;
+  revisions?: IHrefProp;
+  sampleSizeCConfig?: ISampleSizeDefinition;
 }
 
 export interface IDeploymentConfiguration {
@@ -44,10 +40,8 @@ export interface IDecisionModelVariant {
   decisionModelDefinitionRef: string;
   definition: string;
   transpiledDefinition: string;
-  revisions: {
-    href: string;
-  };
-  templateVariables: string;
+  revisions: IHrefProp;
+  templateVariables: ITemplateVariables[];
   inProduction?: boolean;
 }
 
