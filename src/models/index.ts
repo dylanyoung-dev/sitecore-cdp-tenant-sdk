@@ -5,5 +5,7 @@ export * from './common.js';
 export * from './connection.js';
 export * from './decision.js';
 export * from './flow.js';
+export * from './goal.js';
 export * from './guest.js';
+export * from './task.js';
 export * from './template.js';

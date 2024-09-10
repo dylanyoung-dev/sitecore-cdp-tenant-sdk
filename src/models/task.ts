@@ -28,3 +28,15 @@ export interface IRule {
 export interface IRuleData {
   expression: string;
 }
+
+export enum ImplementationType {
+  Template = 'templateRenderTask',
+  Conditions = 'conditionsTask',
+  DecisionModel = 'decisionModelTask',
+}
+
+export enum TaskInputType {
+  Template = 'templateRenderTaskInput',
+  Conditions = 'conditionsTaskInput',
+  DecisionModel = 'decisionModelTaskInput',
+}

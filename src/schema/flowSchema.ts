@@ -18,31 +18,41 @@ const FlowBusinessProcessTypeValue = Object.values(FlowBusinessProcessType) as [
   ...string[]
 ];
 
-const CreateFlowSchema = z.object({
-  name: z.string().min(1, { message: 'name is a required field' }).describe('The name of the flow'),
-  friendlyId: z
-    .string()
-    .describe('The friendly id of the flow')
-    .min(1, { message: 'friendlyId is a required field' })
-    .regex(/^[a-z0-9_]*$/, { message: 'friendlyId must match "^[a-z0-9_]*$"' }),
-  type: z.enum(FlowTypeValues, { errorMap: () => ({ message: 'type is a required field' }) }),
-  channels: z
-    .array(z.enum(FlowChannelValues))
-    .min(1, { message: 'channels should contain atleast one channel' }),
-  status: z.enum(FlowStatusValues, { errorMap: () => ({ message: 'status is a required field' }) }),
-  schedule: z.object({
-    type: z.enum(FlowScheduleTypeValues, {
-      errorMap: () => ({ message: 'schedule.type is a required field' }),
-    }),
-    startDate: z
+const CreateFlowSchema = z
+  .object({
+    name: z
       .string()
-      .min(1, { message: 'schedule.startDate is a required field - Should use ISO 8601 Format' }),
-  }),
-});
+      .min(1, { message: 'name is a required field' })
+      .describe('The name of the flow'),
+    friendlyId: z
+      .string()
+      .describe('The friendly id of the flow')
+      .min(1, { message: 'friendlyId is a required field' })
+      .regex(/^[a-z0-9_]*$/, { message: 'friendlyId must match "^[a-z0-9_]*$"' }),
+    type: z.enum(FlowTypeValues, { errorMap: () => ({ message: 'type is a required field' }) }),
+    channels: z
+      .array(z.enum(FlowChannelValues))
+      .min(1, { message: 'channels should contain atleast one channel' }),
+    status: z.enum(FlowStatusValues, {
+      errorMap: () => ({ message: 'status is a required field' }),
+    }),
+    schedule: z.object({
+      type: z.enum(FlowScheduleTypeValues, {
+        errorMap: () => ({ message: 'schedule.type is a required field' }),
+      }),
+      startDate: z
+        .string()
+        .min(1, { message: 'schedule.startDate is a required field - Should use ISO 8601 Format' }),
+    }),
+  })
+  .strict()
+  .passthrough();
 
 export const CreateExperienceSchema = CreateFlowSchema.extend({
   // No differences for Experiences for Now
-});
+})
+  .strict()
+  .passthrough();
 
 export const CreateExperimentSchema = CreateFlowSchema.extend({
   traffic: z.object({
@@ -70,4 +80,6 @@ export const CreateExperimentSchema = CreateFlowSchema.extend({
     minimumDetectableDifference: z.number(),
     confidenceLevel: z.number(),
   }),
-});
+})
+  .strict()
+  .passthrough();

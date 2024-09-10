@@ -33,21 +33,16 @@ export interface IFlowDefinition {
 
 export interface IFlowTarget {
   script: string;
-  targetPages: IFlowTargetPage[];
+  targetPages: IComparison[];
 }
 
 export interface IFlowTrigger {
   name: string;
   description: string;
-  identifier: IFlowIdentifier[];
+  identifier: IComparison[];
 }
 
-export interface IFlowIdentifier {
-  operator: string;
-  value: string;
-}
-
-export interface IFlowTargetPage {
+export interface IComparison {
   operator: string;
   value: string;
 }
@@ -60,6 +55,9 @@ export interface IDashboardLink {
 export interface IFlowVariant {
   ref?: string;
   name?: string;
+  description?: string;
+  previewUrl?: string;
+  image?: string;
   isControl?: boolean;
   assets?: IFlowAsset;
   templateVariables?: ITemplateVariables;

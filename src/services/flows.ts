@@ -4,7 +4,12 @@ import {
   FlowBusinessProcessType,
   FlowSubType,
   FlowType,
+  IDecisionModelTaskInput,
   IFlowDefinition,
+  ImplementationType,
+  ITask,
+  ITemplateRenderTaskInput,
+  TaskInputType,
   TrafficDefinitionType,
   WeightingAlgorithm,
 } from '../models';
@@ -106,7 +111,7 @@ export class FlowService extends BaseService {
           weightingAlgorithm: WeightingAlgorithm.UserDefined,
           splits: [],
         },
-        variants: [],
+        variants: validatedData.variants ?? [],
         sampleSizeConfig: {
           baseValue: 0.02, // Default Value
           minimumDetectableDifference: 0.2, // Default Value
@@ -156,4 +161,36 @@ export class FlowService extends BaseService {
       }
     }
   };
+
+  /**
+   * Create a template render task input
+   * @param {string} type
+   * @param {string} template
+   * @returns {ITask} Returns a task object
+   */
+  public CreateTemplateRenderTaskInput(template: string): ITask {
+    return {
+      implementation: ImplementationType.Template,
+      input: {
+        inputType: TaskInputType.Template,
+        type: 'application/json',
+        template,
+      } as ITemplateRenderTaskInput,
+    };
+  }
+
+  /**
+   * Create a decision model task input
+   * @param {string[]} decisionModelRefs
+   * @returns {ITask} Returns a task object
+   */
+  public CreateDecisionModelTaskInput(decisionModelRefs: string[]): ITask {
+    return {
+      implementation: ImplementationType.DecisionModel,
+      input: {
+        inputType: TaskInputType.DecisionModel,
+        decisionModelRefs,
+      } as IDecisionModelTaskInput,
+    };
+  }
 }
