@@ -45,10 +45,12 @@ This will start the app in the current terminal window, where changes to the cur
 
 Below is a table that provides details about what is and is not supported currently from Sitecore Personalize. This SDK is currently in active development and the goal is full support with the available APIs, however it is noted below, some cases where the Sitecore Personalize APIs do not support the functionality.
 
-| Feature                | Supported          | Notes                                |
-| ---------------------- | ------------------ | ------------------------------------ |
-| Experiments (Flow)     | :warning:          | In Progress: Lots of work still left |
-| Experiences (Flow)     | :warning:          | In Progress: Lots of work still left |
-| Decision Models        | :warning:          | Use at your own risk!                |
+| Feature                |     Supported      | Notes                                |
+| ---------------------- | :----------------: | ------------------------------------ |
+| Experiments (Flow)     |     :warning:      | In Progress: Lots of work still left |
+| Experiences (Flow)     |     :warning:      | In Progress: Lots of work still left |
+| Decision Models        |     :warning:      | Use at your own risk!                |
 | Templates (Web)        | :white_check_mark: | None                                 |
 | Templates (Conditions) | :white_check_mark: | None                                 |
+| Templates (JS Modules) | :white_check_mark: | None                                 |
+| Templates (Decisions)  | :white_check_mark: | None                                 |
