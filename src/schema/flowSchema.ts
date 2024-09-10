@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import {
+  FlowBusinessProcessType,
   FlowChannel,
   FlowScheduleType,
   FlowStatus,
@@ -12,11 +13,16 @@ const FlowTrafficTypeValues = Object.values(TrafficDefinitionType) as [string, .
 const FlowStatusValues = Object.values(FlowStatus) as [string, ...string[]];
 const FlowScheduleTypeValues = Object.values(FlowScheduleType) as [string, ...string[]];
 const FlowChannelValues = Object.values(FlowChannel) as [string, ...string[]];
+const FlowBusinessProcessTypeValue = Object.values(FlowBusinessProcessType) as [
+  string,
+  ...string[]
+];
 
 const CreateFlowSchema = z.object({
-  name: z.string().min(1, { message: 'name is a required field' }),
+  name: z.string().min(1, { message: 'name is a required field' }).describe('The name of the flow'),
   friendlyId: z
     .string()
+    .describe('The friendly id of the flow')
     .min(1, { message: 'friendlyId is a required field' })
     .regex(/^[a-z0-9_]*$/, { message: 'friendlyId must match "^[a-z0-9_]*$"' }),
   type: z.enum(FlowTypeValues, { errorMap: () => ({ message: 'type is a required field' }) }),
