@@ -1,4 +1,4 @@
-import { IHrefProp, ISampleSizeDefinition, ITemplateElement, ITemplateVariables } from '.';
+import { IHrefProp, ISampleSizeDefinition, ITemplateVariables } from '.';
 import { IGoals } from './goal';
 import { ITask } from './task';
 
@@ -61,9 +61,15 @@ export interface IFlowVariant {
   ref?: string;
   name?: string;
   isControl?: boolean;
-  assets?: ITemplateElement[];
+  assets?: IFlowAsset;
   templateVariables?: ITemplateVariables;
   tasks: ITask[];
+}
+
+export interface IFlowAsset {
+  css: string;
+  html: string;
+  js: string;
 }
 
 export interface IScheduleDefinition {
