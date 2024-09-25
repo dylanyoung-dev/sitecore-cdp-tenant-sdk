@@ -7,6 +7,7 @@ import {
   IDecisionModelTaskInput,
   IFlowDefinition,
   ImplementationType,
+  IResponse,
   ITask,
   ITemplateRenderTaskInput,
   TaskInputType,
@@ -27,16 +28,24 @@ export class FlowService extends BaseService {
 
   /**
    * Get all flows
-   * @returns Promise<IFlowDefinition[] | undefined> Returns an array of flows
+   * @param {number} limit
+   *        The number of flows to retrieve (default is 10)
+   * @param {number} offset
+   *        The offset for pagination (default is 0)
+   * @returns Promise<IResponse<IFlowDefinition> | undefined> Returns an array of flows
    * @throws Error
    *        Throws an error if the request fails
    */
-  public GetAll = async (): Promise<IFlowDefinition[] | undefined> => {
+  public GetAll = async (
+    limit: number = 10,
+    offset: number = 0
+  ): Promise<IResponse<IFlowDefinition> | undefined> => {
     try {
-      const response = await this.Get(`v3/flowDefinitions`);
+      const response = await this.Get(`v3/flowDefinitions?limit=${limit}&offset=${offset}`);
 
       if (response.ok) {
-        let flows: IFlowDefinition[] = (await response.json()) as IFlowDefinition[];
+        let flows: IResponse<IFlowDefinition> =
+          (await response.json()) as IResponse<IFlowDefinition>;
 
         return flows;
       }
