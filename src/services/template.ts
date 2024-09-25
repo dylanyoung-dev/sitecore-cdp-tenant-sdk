@@ -1,6 +1,6 @@
 import { Client } from '../client.js';
 import {
-  IResponse,
+  ICollectionResponse,
   ITemplate,
   ITemplateElement,
   ITestTemplateOutput,
@@ -25,21 +25,22 @@ export class TemplateService extends BaseService {
    * @returns Promise<IResponse<ITemplate[]> | undefined> Returns a response collection with an array of templates
    */
   public GetAll = async (
-    templateType?: TemplateType
-  ): Promise<IResponse<ITemplate[]> | undefined> => {
+    templateType?: TemplateType,
+    limit: number = 10,
+    offset: number = 0
+  ): Promise<ICollectionResponse<ITemplate[]> | undefined> => {
     try {
-      let requestUrl = `v3/templates`;
+      let requestUrl = `v3/templates?limit=${limit}&offset=${offset}`;
 
       if (templateType) {
-        requestUrl = `v3/templates?type=${templateType.toUpperCase()}`;
+        requestUrl = `v3/templates?type=${templateType.toUpperCase()}&limit=${limit}&offset=${offset}`;
       }
 
       const response = await this.Get(requestUrl);
 
       if (response.ok) {
-        let templates: IResponse<ITemplate[]> | undefined = (await response.json()) as IResponse<
-          ITemplate[]
-        >;
+        let templates: ICollectionResponse<ITemplate[]> | undefined =
+          (await response.json()) as ICollectionResponse<ITemplate[]>;
 
         return templates;
       }

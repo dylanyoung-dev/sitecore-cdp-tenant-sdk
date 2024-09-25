@@ -1,5 +1,5 @@
 import { Client } from '../client.js';
-import { IConnection } from '../models/index.js';
+import { ICollectionResponse, IConnection } from '../models/index.js';
 import { BaseService } from './base.js';
 
 /**
@@ -15,12 +15,16 @@ export class ConnectionService extends BaseService {
    * Get all connections
    * @returns Promise<Connection[]> Returns an array of connections
    */
-  public GetAll = async (): Promise<IConnection[] | undefined> => {
+  public GetAll = async (
+    limit: number,
+    offset: number
+  ): Promise<ICollectionResponse<IConnection> | undefined> => {
     try {
-      const response = await this.Get(`v2/connections`);
+      const response = await this.Get(`v2/connections?limit=${limit}&offset=${offset}`);
 
       if (response.ok) {
-        let connections: IConnection[] = (await response.json()) as IConnection[];
+        let connections: ICollectionResponse<IConnection> =
+          (await response.json()) as ICollectionResponse<IConnection>;
 
         return connections;
       }

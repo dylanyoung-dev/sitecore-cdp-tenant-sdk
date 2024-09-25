@@ -4,10 +4,10 @@ import {
   FlowBusinessProcessType,
   FlowSubType,
   FlowType,
+  ICollectionResponse,
   IDecisionModelTaskInput,
   IFlowDefinition,
   ImplementationType,
-  IResponse,
   ITask,
   ITemplateRenderTaskInput,
   TaskInputType,
@@ -39,13 +39,13 @@ export class FlowService extends BaseService {
   public GetAll = async (
     limit: number = 10,
     offset: number = 0
-  ): Promise<IResponse<IFlowDefinition> | undefined> => {
+  ): Promise<ICollectionResponse<IFlowDefinition> | undefined> => {
     try {
       const response = await this.Get(`v3/flowDefinitions?limit=${limit}&offset=${offset}`);
 
       if (response.ok) {
-        let flows: IResponse<IFlowDefinition> =
-          (await response.json()) as IResponse<IFlowDefinition>;
+        let flows: ICollectionResponse<IFlowDefinition> =
+          (await response.json()) as ICollectionResponse<IFlowDefinition>;
 
         return flows;
       }

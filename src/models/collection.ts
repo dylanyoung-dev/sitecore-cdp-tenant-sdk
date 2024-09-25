@@ -1,6 +1,6 @@
-export interface IResponse<T> {
+export interface ICollectionResponse<T> {
   href: string;
   offset?: number;
   limit?: number;
-  items: T[];
+  items: T[] | undefined;
 }
