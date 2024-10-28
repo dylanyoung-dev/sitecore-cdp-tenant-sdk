@@ -13,11 +13,15 @@ export class ConnectionService extends BaseService {
 
   /**
    * Get all connections
-   * @returns Promise<Connection[]> Returns an array of connections
+   * @param {number} limit
+   *       The number of connections to retrieve (default is 10)
+   * @param {number} offset
+   *      The offset for pagination (default is 0)
+   * @returns Promise<ICollectionResponse<Connection[]>> Returns an array of connections
    */
   public GetAll = async (
-    limit: number,
-    offset: number
+    limit: number = 10,
+    offset: number = 0
   ): Promise<ICollectionResponse<IConnection> | undefined> => {
     try {
       const response = await this.Get(`v2/connections?limit=${limit}&offset=${offset}`);

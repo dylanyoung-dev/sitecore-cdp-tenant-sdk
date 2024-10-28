@@ -22,7 +22,11 @@ export class TemplateService extends BaseService {
    * Get all templates
    * @param {TemplateType} [templateType]
    *        Pass in a template type to filter by type
-   * @returns Promise<IResponse<ITemplate[]> | undefined> Returns a response collection with an array of templates
+   * @param {number} limit
+   *       The number of templates to retrieve (default is 10)
+   * @param {number} offset
+   *     The offset for pagination (default is 0)
+   * @returns Promise<ICollectionResponse<ITemplate[]> | undefined> Returns a response collection with an array of templates
    */
   public GetAll = async (
     templateType?: TemplateType,

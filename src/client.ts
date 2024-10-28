@@ -4,6 +4,7 @@ import {
   ConnectionService,
   DecisionService,
   FlowService,
+  SessionTraitService,
   TemplateService,
 } from './services/index.js';
 
@@ -20,6 +21,7 @@ export class Client {
   public Connections: ConnectionService;
   public Flows: FlowService;
   public Decisions: DecisionService;
+  public SessionTraits: SessionTraitService;
 
   constructor(options: IClientInitOptions) {
     this.options = options;
@@ -30,6 +32,7 @@ export class Client {
     this.Connections = new ConnectionService(this);
     this.Flows = new FlowService(this);
     this.Decisions = new DecisionService(this);
+    this.SessionTraits = new SessionTraitService(this);
   }
 
   private async ensureAuthenticated() {

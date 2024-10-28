@@ -9,3 +9,4 @@ export * from './goal.js';
 export * from './guest.js';
 export * from './task.js';
 export * from './template.js';
+export * from './trait.js';

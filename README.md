@@ -4,32 +4,17 @@ Welcome to the Javascript based SDK for using the Sitecore Personalize Tenant/Ad
 
 > This **IS NOT** for ingestion of event data, you should use the Sitecore Engage SDK or Cloud SDK depending on your usage needs. (https://doc.sitecore.com/xmc/en/developers/sdk/latest/cloud-sdk/cloud-sdk-and-engage-sdk-comparison-chart.html)
 
-## Getting Started
-
-To get started using this SDK, you should first install the package as a dependency in your Node project:
-
-```bash
-> npm install sitecore-personalize-tenant-sdk
-```
-
-Once it's installed you'll need to initialize the client:
-
-```javascript
-import { Client, RegionOptions, TemplateType } from 'sitecore-personalize-tenant-sdk';
-
-let client: Client;
-client = new Client({
-  clientId: '<ClientId>',
-  clientSecret: '<ClientSecret>',
-  region: RegionOptions.EU,
-});
-
-let response = await client.Templates.GetAll(TemplateType.Web);
-```
-
 This module is built to support ESM and CommonJS.
 
-## Development / Contributions
+# Getting Started - Usage Guides
+
+- [Getting Started (Init/Auth)](./docs/getting-started.md)
+- Templates
+- Flows
+- Decision Models
+- Connections
+
+# Development / Contributions
 
 You can get setup for local development by cloning the repository and running the following commands:
 
@@ -41,7 +26,7 @@ $ npm run dev
 
 This will start the app in the current terminal window, where changes to the current files, will be reflected immediately (via a watch command with tsup).
 
-## Feature Support
+# Feature Support
 
 Below is a table that provides details about what is and is not supported currently from Sitecore Personalize. This SDK is currently in active development and the goal is full support with the available APIs, however it is noted below, some cases where the Sitecore Personalize APIs do not support the functionality.
 
@@ -54,3 +39,4 @@ Below is a table that provides details about what is and is not supported curren
 | Templates (Conditions) | :white_check_mark: | None                                 |
 | Templates (JS Modules) | :white_check_mark: | None                                 |
 | Templates (Decisions)  | :white_check_mark: | None                                 |
+| Connections            |     :warning:      | Built but needs testing              |

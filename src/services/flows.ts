@@ -32,7 +32,7 @@ export class FlowService extends BaseService {
    *        The number of flows to retrieve (default is 10)
    * @param {number} offset
    *        The offset for pagination (default is 0)
-   * @returns Promise<IResponse<IFlowDefinition> | undefined> Returns an array of flows
+   * @returns Promise<ICollectionResponse<IFlowDefinition> | undefined> Returns an array of flows
    * @throws Error
    *        Throws an error if the request fails
    */
