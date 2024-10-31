@@ -9,8 +9,10 @@ This module is built to support ESM and CommonJS.
 # Getting Started - Usage Guides
 
 - [Getting Started (Init/Auth)](./docs/getting-started.md)
-- Templates
+- [Templates](./docs/templates.md)
 - Flows
+  - Experiences
+  - Experiments
 - Decision Models
 - Connections
 
@@ -40,3 +42,10 @@ Below is a table that provides details about what is and is not supported curren
 | Templates (JS Modules) | :white_check_mark: | <span style="color:yellow">In Progress</span> | <span style="color:red">No</span> | None                                 |
 | Templates (Decisions)  | :white_check_mark: | <span style="color:yellow">In Progress</span> | <span style="color:red">No</span> | None                                 |
 | Connections            |     :warning:      | <span style="color:red">No</span>             | <span style="color:red">No</span> | Built but needs testing              |
+
+# Example Repositories
+
+Below is a list of repositories on Github that are using this SDK. If you know of any repositories that have been missed, submit a Pull Request.
+
+- [Sitecore Assistant](https://github.com/dylanyoung-dev/sitecore-assistant): Uses Generative AI with the SDK to create experiences on the fly.
+- Sitecore CDP/Personalize Serializer: Coming Soon (currently doesn't use the SDK)
